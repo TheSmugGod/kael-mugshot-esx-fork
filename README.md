@@ -10,6 +10,7 @@ Drag and Drop
 - [esx legacy](https://github.com/esx-framework/esx_core)
 - [ox_target](https://github.com/overextended/ox_target)
 - [ox_lib](https://github.com/overextended/ox_lib)
+- [screenshot-basic](https://github.com/citizenfx/screenshot-basic)
 
 ## More From Smug
 - [Smugs_Mailboxes](https://forum.cfx.re/t/smugs-mailboxes/5078875/17)
