@@ -1,32 +1,41 @@
-local QBCore = exports[Config.Core]:GetCoreObject()
-local ScreenShotHook = "https://discord.com/api/webhooks/1049709224218861609/EUkDsaiv76Q9X4jyc2VCguLuD9Z2zoax2TyMk1dtGZDCl6Psc6uXmY-xm-zWbPgv_1jS"
-local MugShotHook = "https://discord.com/api/webhooks/1049709224218861609/EUkDsaiv76Q9X4jyc2VCguLuD9Z2zoax2TyMk1dtGZDCl6Psc6uXmY-xm-zWbPgv_1jS"
+--local QBCore = exports[Config.Core]:GetCoreObject()
+ESX = exports["es_extended"]:getSharedObject()
+local ScreenShotHook = "YOUR WEBHOOK HERE"
+local MugShotHook = "YOUR WEBHOOK HERE"
 
-QBCore.Functions.CreateCallback("kael-mugshot:server:GetWebhook", function(source, cb)
+--[[QBCore.Functions.CreateCallback("kael-mugshot:server:GetWebhook", function(source, cb)
+    cb(ScreenShotHook)
+end)]]
+
+ESX.RegisterServerCallback('kael-mugshot:server:GetWebhook', function(source, cb)
     cb(ScreenShotHook)
 end)
 
+
 RegisterNetEvent("kael-mugshot:server:takemugshot", function(targetid)
     local TargetId = tonumber(targetid)
-    local Target = QBCore.Functions.GetPlayer(TargetId)
+    local Target = ESX.GetPlayerFromId(TargetId)
+    local xPlayer = ESX.GetPlayerFromId(source)
     if Target then 
         if TargetId ~= source then
             TriggerClientEvent("kael-mugshot:client:takemugshot", TargetId, source)
         else 
-            TriggerClientEvent('QBCore:Notify', source, "You Can't Take Mugshot Your Self", 'error')
+	-- make sure to delete this
+	TriggerClientEvent("kael-mugshot:client:takemugshot", TargetId, source)
+        --    xPlayer.showNotification('You Cant Take Mugshot Your Self!')
         end
     else
-        TriggerClientEvent('QBCore:Notify', source, "Citizen Id Invalid!", 'error')
+        xPlayer.showNotification('Citizen Id Invalid!')
     end
 end)
 
 RegisterNetEvent("kael-mugshot:server:MugLog", function(officer, MugShot)
-    local Suspect = QBCore.Functions.GetPlayer(source)
-    local Police = QBCore.Functions.GetPlayer(officer)
-    local suspectName = Suspect.PlayerData.charinfo.firstname .. ' ' .. Suspect.PlayerData.charinfo.lastname
-    local suspectCitizenID = Suspect.PlayerData.citizenid
-    local suspectDOB = Suspect.PlayerData.charinfo.birthdate
-    local policeName = Police.PlayerData.charinfo.firstname .. ' ' .. Police.PlayerData.charinfo.lastname   
+    local Suspect = ESX.GetPlayerFromId(source)
+    local Police = ESX.GetPlayerFromId(officer)
+    local suspectName = Suspect.PlayerData.name
+    local suspectCitizenID = 'OKC-'ESX.GetRandomString(5)
+    local suspectDOB = Suspect.PlayerData.dateofbirth
+    local policeName = Police.PlayerData.name  
     local embedData = {
         {
             ['title'] = Config.LogTitle,
