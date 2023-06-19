@@ -5,6 +5,7 @@
 ## INSTALL
 
 Drag and Drop
+Edit the coords in the config file for your map,
 
 ## Dependencies
 - [esx legacy](https://github.com/esx-framework/esx_core)
